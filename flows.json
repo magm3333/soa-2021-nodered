@@ -31,6 +31,13 @@
         "id": "788a69d8.e50fc8",
         "type": "tab",
         "label": "mqttMongo",
+        "disabled": true,
+        "info": ""
+    },
+    {
+        "id": "204b7d02.4f4132",
+        "type": "tab",
+        "label": "Nodo HTTP",
         "disabled": false,
         "info": ""
     },
@@ -253,7 +260,8 @@
         "tab": "34d3b80f.c8add8",
         "order": 2,
         "disp": true,
-        "width": 6
+        "width": "20",
+        "collapse": false
     },
     {
         "id": "c2f4e757.2a3708",
@@ -1387,6 +1395,706 @@
         "wires": [
             [
                 "d5cd1742.df6128"
+            ]
+        ]
+    },
+    {
+        "id": "a5ec8f6e.7d399",
+        "type": "http in",
+        "z": "204b7d02.4f4132",
+        "name": "",
+        "url": "/basico",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 130,
+        "y": 80,
+        "wires": [
+            [
+                "fb94951e.8747d8"
+            ]
+        ]
+    },
+    {
+        "id": "fb94951e.8747d8",
+        "type": "change",
+        "z": "204b7d02.4f4132",
+        "name": "",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$now()\t",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 300,
+        "y": 80,
+        "wires": [
+            [
+                "9375844e.950808"
+            ]
+        ]
+    },
+    {
+        "id": "9375844e.950808",
+        "type": "template",
+        "z": "204b7d02.4f4132",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<html>\n    <title>Hola Mundo</title>\n    <body>\n        Hola, hoy es: {{payload}}\n    </body>\n</html>",
+        "output": "str",
+        "x": 460,
+        "y": 80,
+        "wires": [
+            [
+                "72f1f245.1d140c"
+            ]
+        ]
+    },
+    {
+        "id": "72f1f245.1d140c",
+        "type": "http response",
+        "z": "204b7d02.4f4132",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 590,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "fcdef3de.171ec",
+        "type": "http in",
+        "z": "204b7d02.4f4132",
+        "name": "",
+        "url": "/query",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 180,
+        "wires": [
+            [
+                "37e055a7.c508ea"
+            ]
+        ]
+    },
+    {
+        "id": "37e055a7.c508ea",
+        "type": "template",
+        "z": "204b7d02.4f4132",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<html>\n    <title>Query Params</title>\n    <body>\n        Hola: <strong>{{req.query.nombre}}</strong><br/>\n        <p>Tus colores favoritos:</p>\n        <ol>\n        {{#req.query.colores}}\n            <li>{{.}}</li>\n        {{/req.query.colores}}\n        <ol>\n    </body>\n</html>",
+        "output": "str",
+        "x": 260,
+        "y": 180,
+        "wires": [
+            [
+                "17fbf9ba.7278a6"
+            ]
+        ]
+    },
+    {
+        "id": "17fbf9ba.7278a6",
+        "type": "http response",
+        "z": "204b7d02.4f4132",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 390,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "8bb1b4af.94ae68",
+        "type": "http in",
+        "z": "204b7d02.4f4132",
+        "name": "",
+        "url": "/urlparams/:nombre/:color",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 190,
+        "y": 280,
+        "wires": [
+            [
+                "8fceacf2.ac2ee"
+            ]
+        ]
+    },
+    {
+        "id": "8fceacf2.ac2ee",
+        "type": "template",
+        "z": "204b7d02.4f4132",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<html>\n    <title>URL Params</title>\n    <body>\n        Hola: <strong>{{req.params.nombre}}</strong><br/>\n        <p>Tu color favorito es: \n            <span style=\"color:{{req.params.color}}\">\n                {{req.params.color}}\n            <span>\n        </p>\n    </body>\n</html>",
+        "output": "str",
+        "x": 400,
+        "y": 280,
+        "wires": [
+            [
+                "1f5969dc.caea06"
+            ]
+        ]
+    },
+    {
+        "id": "1f5969dc.caea06",
+        "type": "http response",
+        "z": "204b7d02.4f4132",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 530,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "5e1aa162.17557",
+        "type": "comment",
+        "z": "204b7d02.4f4132",
+        "name": "Básico",
+        "info": "",
+        "x": 120,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "cee87ace.b4e548",
+        "type": "comment",
+        "z": "204b7d02.4f4132",
+        "name": "Query Params",
+        "info": "",
+        "x": 130,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "743d6b9f.ec9f64",
+        "type": "comment",
+        "z": "204b7d02.4f4132",
+        "name": "Path Params (Path Variables)",
+        "info": "",
+        "x": 180,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "1d191fed.54268",
+        "type": "http in",
+        "z": "204b7d02.4f4132",
+        "name": "",
+        "url": "/headers",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 130,
+        "y": 380,
+        "wires": [
+            [
+                "96b783d2.a356b"
+            ]
+        ]
+    },
+    {
+        "id": "96b783d2.a356b",
+        "type": "function",
+        "z": "204b7d02.4f4132",
+        "name": "",
+        "func": "var authToken=msg.req.headers['x-auth-token'];\nmsg.auth= (authToken && authToken=='clave');\nif(!msg.auth) {\n    msg.statusCode=401;\n}\nmsg.cabeceras=[];\n\nObject.keys(msg.req.headers).forEach(function(o,i)  {\n    msg.cabeceras.push({name:o, value:msg.req.headers[o]});\n});\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 270,
+        "y": 380,
+        "wires": [
+            [
+                "c2046f10.6850e"
+            ]
+        ]
+    },
+    {
+        "id": "c2046f10.6850e",
+        "type": "template",
+        "z": "204b7d02.4f4132",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<html>\n    <title>Headers</title>\n    <body>\n        {{#auth}}\n            <span style=\"color:green\">Autorizado!</span>\n        {{/auth}}\n        {{^auth}}\n            <span style=\"color:red\">No Autorizado</span>\n        {{/auth}}\n        <p>Cabeceras de petición recibidas</p>\n        <ul>\n        {{#cabeceras}}\n            <li>{{name}}={{value}}</li>\n        {{/cabeceras}}\n        <ul>\n    </body>\n</html>",
+        "output": "str",
+        "x": 400,
+        "y": 380,
+        "wires": [
+            [
+                "7b4d7749.258298"
+            ]
+        ]
+    },
+    {
+        "id": "7b4d7749.258298",
+        "type": "http response",
+        "z": "204b7d02.4f4132",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 530,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "d1b8ed2d.f8849",
+        "type": "comment",
+        "z": "204b7d02.4f4132",
+        "name": "Headers",
+        "info": "",
+        "x": 130,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "6baa3474.d0ed0c",
+        "type": "http in",
+        "z": "204b7d02.4f4132",
+        "name": "",
+        "url": "/getjson",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 110,
+        "y": 480,
+        "wires": [
+            [
+                "4f2e5809.cf17c8"
+            ]
+        ]
+    },
+    {
+        "id": "4f2e5809.cf17c8",
+        "type": "template",
+        "z": "204b7d02.4f4132",
+        "name": "",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "{\n    \"nombre\":\"Eva\"\n}",
+        "output": "str",
+        "x": 260,
+        "y": 480,
+        "wires": [
+            [
+                "fb74055e.65b508"
+            ]
+        ]
+    },
+    {
+        "id": "fb74055e.65b508",
+        "type": "change",
+        "z": "204b7d02.4f4132",
+        "name": "Set Headers",
+        "rules": [
+            {
+                "t": "set",
+                "p": "headers",
+                "pt": "msg",
+                "to": "{}",
+                "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "headers.content-type",
+                "pt": "msg",
+                "to": "application/json",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 410,
+        "y": 480,
+        "wires": [
+            [
+                "93bd21f9.9c8c6"
+            ]
+        ]
+    },
+    {
+        "id": "93bd21f9.9c8c6",
+        "type": "http response",
+        "z": "204b7d02.4f4132",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 550,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "650d3fda.cf6d8",
+        "type": "comment",
+        "z": "204b7d02.4f4132",
+        "name": "JSON Output",
+        "info": "",
+        "x": 110,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "c35c6012.63c13",
+        "type": "http in",
+        "z": "204b7d02.4f4132",
+        "name": "",
+        "url": "/descarga",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 600,
+        "wires": [
+            [
+                "b445075d.6606c8"
+            ]
+        ]
+    },
+    {
+        "id": "b445075d.6606c8",
+        "type": "file in",
+        "z": "204b7d02.4f4132",
+        "name": "",
+        "filename": "/data/linux.png",
+        "format": "",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "binary",
+        "x": 320,
+        "y": 600,
+        "wires": [
+            [
+                "c7ef5b96.69dac8"
+            ]
+        ]
+    },
+    {
+        "id": "c7ef5b96.69dac8",
+        "type": "http response",
+        "z": "204b7d02.4f4132",
+        "name": "",
+        "statusCode": "200",
+        "headers": {
+            "content-type": "image/png"
+        },
+        "x": 480,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "c14a2319.373ae",
+        "type": "comment",
+        "z": "204b7d02.4f4132",
+        "name": "Download File",
+        "info": "",
+        "x": 130,
+        "y": 560,
+        "wires": []
+    },
+    {
+        "id": "d998171b.174aa8",
+        "type": "http in",
+        "z": "204b7d02.4f4132",
+        "name": "",
+        "url": "/raw_body",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 720,
+        "wires": [
+            [
+                "2bfc90b5.aad8b"
+            ]
+        ]
+    },
+    {
+        "id": "2bfc90b5.aad8b",
+        "type": "template",
+        "z": "204b7d02.4f4132",
+        "name": "page",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<html>\n    <title>Raw Body</title>\n    <body>\n        {{payload}}\n    </body>\n</html>",
+        "x": 290,
+        "y": 720,
+        "wires": [
+            [
+                "84aa92ee.182e6"
+            ]
+        ]
+    },
+    {
+        "id": "84aa92ee.182e6",
+        "type": "http response",
+        "z": "204b7d02.4f4132",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 410,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "4c582dd8.9806a4",
+        "type": "comment",
+        "z": "204b7d02.4f4132",
+        "name": "Post Raw Data",
+        "info": "",
+        "x": 140,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "c060ee2f.7659f",
+        "type": "http in",
+        "z": "204b7d02.4f4132",
+        "name": "",
+        "url": "/form_data",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 900,
+        "wires": [
+            [
+                "70a2d810.796bc8"
+            ]
+        ]
+    },
+    {
+        "id": "70a2d810.796bc8",
+        "type": "template",
+        "z": "204b7d02.4f4132",
+        "name": "page",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<html>\n    <title>Form Data</title>\n    <body>\n        Hola: {{payload.nombre}}, {{payload.apellido}}\n    </body>\n</html>",
+        "x": 290,
+        "y": 900,
+        "wires": [
+            [
+                "b55e380b.834e68"
+            ]
+        ]
+    },
+    {
+        "id": "b55e380b.834e68",
+        "type": "http response",
+        "z": "204b7d02.4f4132",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 410,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "64fbb31a.fb3c1c",
+        "type": "http in",
+        "z": "204b7d02.4f4132",
+        "name": "",
+        "url": "/form_data",
+        "method": "put",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 820,
+        "wires": [
+            [
+                "98d64bd2.f71588"
+            ]
+        ]
+    },
+    {
+        "id": "98d64bd2.f71588",
+        "type": "template",
+        "z": "204b7d02.4f4132",
+        "name": "page",
+        "field": "payload",
+        "fieldType": "msg",
+        "format": "handlebars",
+        "syntax": "mustache",
+        "template": "<html>\n    <title>Form Data</title>\n    <body>\n        Hola: {{payload.nombre}}, {{payload.apellido}}\n    </body>\n</html>",
+        "x": 290,
+        "y": 820,
+        "wires": [
+            [
+                "3ca29f81.e1905"
+            ]
+        ]
+    },
+    {
+        "id": "3ca29f81.e1905",
+        "type": "http response",
+        "z": "204b7d02.4f4132",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 410,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "300e16a6.066f9a",
+        "type": "comment",
+        "z": "204b7d02.4f4132",
+        "name": "Put/Post Form Data",
+        "info": "",
+        "x": 150,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "47f6ad3d.91fe94",
+        "type": "http in",
+        "z": "204b7d02.4f4132",
+        "name": "",
+        "url": "/add_json",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 140,
+        "y": 1000,
+        "wires": [
+            [
+                "cea79941.fe12d8"
+            ]
+        ]
+    },
+    {
+        "id": "cea79941.fe12d8",
+        "type": "mongodb-node",
+        "z": "204b7d02.4f4132",
+        "mongodb": "57c525ea.42499c",
+        "name": "",
+        "collection": "lista_json",
+        "operation": "insert",
+        "upsert": false,
+        "multi": false,
+        "x": 380,
+        "y": 1000,
+        "wires": [
+            [
+                "61979dd2.2c42c4"
+            ]
+        ]
+    },
+    {
+        "id": "61979dd2.2c42c4",
+        "type": "http response",
+        "z": "204b7d02.4f4132",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 590,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "c202e2bf.b2c77",
+        "type": "comment",
+        "z": "204b7d02.4f4132",
+        "name": "Post JSON & Store into mongodb",
+        "info": "",
+        "x": 190,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "10084887.83dc27",
+        "type": "ui_table",
+        "z": "204b7d02.4f4132",
+        "group": "abed7d99.14303",
+        "name": "",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "columns": [],
+        "outputs": 0,
+        "cts": false,
+        "x": 590,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "9273fcaa.bcdee",
+        "type": "mongodb-node",
+        "z": "204b7d02.4f4132",
+        "mongodb": "57c525ea.42499c",
+        "name": "",
+        "collection": "lista_json",
+        "operation": "find",
+        "upsert": false,
+        "multi": false,
+        "x": 380,
+        "y": 1060,
+        "wires": [
+            [
+                "10084887.83dc27"
+            ]
+        ]
+    },
+    {
+        "id": "32bb581c.2eba48",
+        "type": "inject",
+        "z": "204b7d02.4f4132",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 1060,
+        "wires": [
+            [
+                "9273fcaa.bcdee"
             ]
         ]
     }

@@ -1,0 +1,12 @@
+{
+    "name": "soa-2021-nodered",
+    "description": "Lo visto en clases de SOA / IUA / 2021",
+    "version": "0.0.1",
+    "dependencies": {},
+    "node-red": {
+        "settings": {
+            "flowFile": "flows.json",
+            "credentialsFile": "flows_cred.json"
+        }
+    }
+}
